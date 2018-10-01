@@ -5,9 +5,19 @@ import org.springframework.stereotype.Component;
 import com.udemy.backendninja.entity.ContactEntity;
 import com.udemy.backendninja.model.ContactModel;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ContactConverter.
+ */
 @Component("contactConverter")
 public class ContactConverter {
 	
+	/**
+	 * Model to entity.
+	 *
+	 * @param contactModel the contact model
+	 * @return the contact entity
+	 */
 	public ContactEntity modelToEntity(ContactModel contactModel) {
 		ContactEntity contactEntity = new ContactEntity();
 		contactEntity.setCity(contactModel.getCity());
@@ -18,6 +28,12 @@ public class ContactConverter {
 		return contactEntity;
 	}
 	
+	/**
+	 * Entity to model.
+	 *
+	 * @param contactEntity the contact entity
+	 * @return the contact model
+	 */
 	public ContactModel entityToModel(ContactEntity contactEntity) {
 		ContactModel contactModel = new ContactModel();
 		contactModel.setCity(contactEntity.getCity());

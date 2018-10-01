@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
@@ -42,9 +41,10 @@ public class RequestTimeInterceptor extends HandlerInterceptorAdapter {
 		long startTime = (long) request.getAttribute("startTime");
 		String url = request.getRequestURL().toString();
 		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String username = "";
 		String details = "";
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		
 		if (auth != null && auth.isAuthenticated()) {
 			username = auth.getName();
 			details = auth.getDetails().toString();

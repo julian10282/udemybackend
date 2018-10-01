@@ -19,13 +19,21 @@ import com.udemy.backendninja.entity.UserEntity;
 import com.udemy.backendninja.entity.UserRoleEntity;
 import com.udemy.backendninja.repository.UserRepository;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserService.
+ */
 @Service("userService")
 public class UserService implements UserDetailsService {
 
+	/** The user repository. */
 	@Autowired
 	@Qualifier("userRepository")
 	private UserRepository userRepository;
 	
+	/* (non-Javadoc)
+	 * @see org.springframework.security.core.userdetails.UserDetailsService#loadUserByUsername(java.lang.String)
+	 */
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		UserEntity userEntity = userRepository.findByUsername(username);
@@ -33,11 +41,24 @@ public class UserService implements UserDetailsService {
 		return buildUser(userEntity, authorities);
 	}
 	
+	/**
+	 * Builds the user.
+	 *
+	 * @param userEntity the user entity
+	 * @param authorities the authorities
+	 * @return the user
+	 */
 	private User buildUser(UserEntity userEntity, List<GrantedAuthority> authorities) {
 		return new User(userEntity.getUsername(), userEntity.getPassword(), userEntity.isEnabled(),
 				true, true, true, authorities);
 	}
 	
+	/**
+	 * Builds the authorities.
+	 *
+	 * @param userRoles the user roles
+	 * @return the list
+	 */
 	private List<GrantedAuthority> buildAuthorities (Set<UserRoleEntity> userRoles){
 		Set<GrantedAuthority> auths = new HashSet<>();
 		
